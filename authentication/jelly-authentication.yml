@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: searched
+source: https://api.getjelly.co.uk/
+description: >-
+  The Jelly GraphQL API at https://api.getjelly.co.uk/ requires a bearer token.
+  Unauthenticated operations return a GraphQL error with
+  extensions.code = "UNAUTHENTICATED" ("Unauthorized access"). Schema
+  introspection is publicly available; all data/mutation operations are
+  authenticated. Tokens are issued through the Jelly kitchen app
+  (kitchen.getjelly.co.uk) sign-in; Jelly does not publish a public OAuth
+  authorization server or developer API-key console.
+summary:
+  types: [http]
+  http_scheme: bearer
+  api_key_in: []
+  oauth2_flows: []
+schemes:
+  - name: bearerAuth
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    description: >-
+      Authorization: Bearer <token> header required on all authenticated
+      GraphQL operations. Observed live: omitting it yields
+      {"extensions":{"code":"UNAUTHENTICATED"}}.
+    sources: [https://api.getjelly.co.uk/]
+transport:
+  protocol: graphql
+  endpoint: https://api.getjelly.co.uk/
+  method: POST
+roles:
+  # from the UserRole enum in the GraphQL schema
+  - admin
+  - kitchen
+notes: >-
+  This profile is searched from live API behaviour rather than an OpenAPI
+  securitySchemes block (Jelly ships a GraphQL API, not OpenAPI). No public
+  self-serve API credential page was found; access is scoped to authenticated
+  kitchen-app sessions.
