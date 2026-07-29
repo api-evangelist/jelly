@@ -1,0 +1,96 @@
+generated: '2026-07-19'
+method: derived
+source: graphql/jelly-api.graphql
+description: >-
+  Entity-relationship model derived from the Jelly GraphQL schema (introspected
+  from https://api.getjelly.co.uk/). Jelly is a costing and kitchen-management
+  platform; the core domain graph runs Account -> Kitchen -> (Suppliers,
+  Products, Ingredients, Recipes, Dishes, Menus, Invoices, Purchase Orders).
+scalars:
+  id: UUID
+  money: Currency
+  precise: Decimal
+entities:
+  - name: Account
+    description: Billing/tenant account that owns one or more kitchens.
+    relationships:
+      - { type: has_one, target: User, via: owner }
+      - { type: has_many, target: Kitchen, via: kitchens }
+  - name: Kitchen
+    description: A single kitchen/site - the primary workspace entity.
+    relationships:
+      - { type: belongs_to, target: Account, via: account }
+      - { type: has_many, target: Stock, via: stock }
+      - { type: has_many, target: Dish, via: dishes }
+      - { type: has_many, target: Ingredient, via: ingredients }
+      - { type: has_many, target: Menu, via: menus }
+      - { type: has_many, target: Recipe, via: recipes }
+      - { type: has_many, target: KitchenToSupplier, via: suppliers }
+      - { type: has_many, target: KitchenToUser, via: users }
+      - { type: has_one, target: KitchenPermissions, via: permissions }
+  - name: User
+    description: A person with access to one or more kitchens (roles admin, kitchen).
+    relationships:
+      - { type: has_many, target: KitchenToUser, via: kitchens }
+  - name: Supplier
+    description: A supplier a kitchen buys products from.
+    relationships:
+      - { type: has_many, target: Product, via: products }
+      - { type: has_many, target: KitchenToSupplier, via: kitchens }
+      - { type: has_many, target: PurchaseOrder, via: purchaseOrders }
+      - { type: has_many, target: KitchenSupplierDetail, via: kitchenDetails }
+  - name: Product
+    description: A purchasable line item from a supplier, priced per unit.
+    relationships:
+      - { type: belongs_to, target: Supplier, via: supplier }
+      - { type: has_one, target: Unit, via: unit }
+      - { type: has_many, target: Ingredient, via: ingredients }
+  - name: Ingredient
+    description: A kitchen-scoped ingredient linked to a supplier product for costing.
+    relationships:
+      - { type: belongs_to, target: Kitchen, via: kitchen }
+      - { type: has_one, target: Product, via: product }
+      - { type: has_many, target: RecipeToIngredient, via: recipes }
+      - { type: has_one, target: PriceChangesOverview, via: priceChangesList }
+  - name: Recipe
+    description: A recipe built from ingredients and/or child recipes; carries GP/cost.
+    relationships:
+      - { type: belongs_to, target: Kitchen, via: kitchen }
+      - { type: has_many, target: RecipeToIngredient, via: ingredients }
+      - { type: has_many, target: RecipeToRecipe, via: childRecipes }
+      - { type: has_many, target: RecipeToAllergen, via: allergens }
+      - { type: has_one, target: Dish, via: dish }
+  - name: Dish
+    description: A menu-ready dish backed by a recipe, with sale price and GP.
+    relationships:
+      - { type: belongs_to, target: Kitchen, via: kitchen }
+      - { type: has_one, target: Recipe, via: recipe }
+      - { type: has_many, target: MenuToDish, via: menus }
+  - name: Menu
+    description: A collection of dishes.
+    relationships:
+      - { type: belongs_to, target: Kitchen, via: kitchen }
+      - { type: has_many, target: MenuToDish, via: dishes }
+  - name: Invoice
+    description: A supplier invoice (with entries) processed for costing and accounting.
+    relationships:
+      - { type: belongs_to, target: Kitchen, via: kitchen }
+      - { type: belongs_to, target: Supplier, via: supplier }
+      - { type: has_many, target: InvoiceEntry, via: entries }
+      - { type: has_one, target: PendingInvoice, via: pendingInvoice }
+  - name: PurchaseOrder
+    description: An order placed to a supplier, with line entries and a delivery address.
+    relationships:
+      - { type: belongs_to, target: Kitchen, via: kitchen }
+      - { type: belongs_to, target: Supplier, via: supplier }
+      - { type: has_many, target: PurchaseOrderEntry, via: entries }
+      - { type: has_one, target: Address, via: address }
+  - name: Allergen
+    description: An allergen referenced by recipes.
+    relationships:
+      - { type: has_many, target: RecipeToAllergen, via: recipes }
+notes: >-
+  Many-to-many links are modelled through explicit join types
+  (KitchenToSupplier, KitchenToUser, RecipeToIngredient, RecipeToRecipe,
+  RecipeToAllergen, MenuToDish). Third-party accounting integration (Xero) is
+  exposed through Acc* types (AccInvoice, AccStatus: connected).

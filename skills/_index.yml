@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: graphql/jelly-api.graphql
+skills:
+  - file: jelly-cost-a-recipe.md
+    name: Cost a recipe in Jelly
+    api: graphql/jelly-api.graphql
+    operations: [createOneIngredient, createOneRecipe, recipe, ingredients]
+  - file: jelly-process-supplier-invoice.md
+    name: Process a supplier invoice in Jelly
+    api: graphql/jelly-api.graphql
+    operations: [invoices, approveOneInvoice, suppliers]
+  - file: jelly-build-a-menu.md
+    name: Build a menu in Jelly
+    api: graphql/jelly-api.graphql
+    operations: [createOneDish, createOneMenu, dishes, createOrUpdateDishesSold]

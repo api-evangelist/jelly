@@ -1,0 +1,59 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: graphql/jelly-api.graphql
+description: >-
+  Candidate MCP server for the Jelly GraphQL API. Jelly does not publish a
+  hosted/remote MCP server; this is a DERIVED candidate tool list mapping a
+  curated subset of real GraphQL operations (verified in
+  graphql/jelly-api.graphql) to MCP tools. Not an official Jelly product.
+server:
+  name: jelly
+  transport: http
+  endpoint: https://api.getjelly.co.uk/
+  protocol: graphql
+  auth: bearer
+tools:
+  - name: list_kitchens
+    description: List the kitchens on the current account.
+    source_operation: graphql/jelly-api.graphql#Query.kitchens
+  - name: get_dashboard_kitchen
+    description: Fetch dashboard data for a kitchen.
+    source_operation: graphql/jelly-api.graphql#Query.dashboardKitchen
+  - name: list_ingredients
+    description: List ingredients for a kitchen (take/skip/where/orderBy).
+    source_operation: graphql/jelly-api.graphql#Query.ingredients
+  - name: list_recipes
+    description: List recipes for a kitchen.
+    source_operation: graphql/jelly-api.graphql#Query.recipes
+  - name: list_dishes
+    description: List dishes for a kitchen.
+    source_operation: graphql/jelly-api.graphql#Query.dishes
+  - name: list_suppliers
+    description: List suppliers linked to a kitchen.
+    source_operation: graphql/jelly-api.graphql#Query.suppliers
+  - name: list_products
+    description: List supplier products.
+    source_operation: graphql/jelly-api.graphql#Query.products
+  - name: list_invoices
+    description: List supplier invoices.
+    source_operation: graphql/jelly-api.graphql#Query.invoices
+  - name: create_ingredient
+    description: Create an ingredient.
+    source_operation: graphql/jelly-api.graphql#Mutation.createOneIngredient
+  - name: create_recipe
+    description: Create a recipe.
+    source_operation: graphql/jelly-api.graphql#Mutation.createOneRecipe
+  - name: create_dish
+    description: Create a dish.
+    source_operation: graphql/jelly-api.graphql#Mutation.createOneDish
+  - name: create_menu
+    description: Create a menu.
+    source_operation: graphql/jelly-api.graphql#Mutation.createOneMenu
+  - name: approve_invoice
+    description: Approve a pending supplier invoice.
+    source_operation: graphql/jelly-api.graphql#Mutation.approveOneInvoice
+notes: >-
+  The full schema exposes 232 queries and 168 mutations; this candidate curates
+  the marquee costing/kitchen-management flows. Every source_operation is a real
+  field verified in the introspected schema.

@@ -1,0 +1,29 @@
+# Jelly
+
+> Jelly is an all-in-one costing and kitchen-management platform for the hospitality industry (restaurants and professional kitchens). It handles invoice processing, ingredient and recipe costing, gross-profit (GP) analysis, menu and dish management, suppliers, products, and purchase orders. Jelly exposes a GraphQL API and publishes a first-party UI component library.
+
+## API
+
+- [Jelly GraphQL API](https://api.getjelly.co.uk/): Single GraphQL endpoint (POST). Bearer-token auth; public introspection. 232 queries, 168 mutations.
+- [GraphQL schema (SDL)](graphql/jelly-api.graphql): Full introspected schema.
+- [GraphQL introspection (JSON)](graphql/jelly-api-introspection.json): Verbatim introspection result.
+
+## Artifacts
+
+- [Authentication](authentication/jelly-authentication.yml): Bearer (JWT) on all authenticated operations.
+- [Conventions](conventions/jelly-conventions.yml): Prisma-style cursor/take/skip/where/orderBy pagination; GraphQL error envelope.
+- [Data model](data-model/jelly-data-model.yml): Account -> Kitchen -> Suppliers, Products, Ingredients, Recipes, Dishes, Menus, Invoices, Purchase Orders.
+- [Error codes](errors/jelly-error-codes.yml): GraphQL error envelope; UNAUTHENTICATED, BAD_REQUEST.
+- [Packages](packages/jelly-packages.yml): @getjelly/jelly-ui (npm).
+- [Components](components/jelly-components.yml): Jelly UI component library.
+- [Conformance](conformance/jelly-conformance.yml): GraphQL, bearer auth; SOC 2 Type II in progress.
+
+## Docs
+
+- [Jelly](https://www.getjelly.co.uk/): Marketing site and product overview.
+- [Jelly Docs](https://docs.getjelly.co.uk/): Documentation for Jelly UI and core costing concepts.
+- [Pricing](https://www.getjelly.co.uk/pricing): Plans and pricing.
+- [Security](https://www.getjelly.co.uk/security): Security policy (AES-256 at rest, TLS 1.2/1.3).
+- [Kitchen app](https://kitchen.getjelly.co.uk/): The Jelly web application (sign in / sign up).
+- [Terms](https://www.getjelly.co.uk/terms): Terms of service.
+- [Privacy](https://www.getjelly.co.uk/privacy): Privacy policy.

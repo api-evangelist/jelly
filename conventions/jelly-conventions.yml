@@ -1,0 +1,69 @@
+generated: '2026-07-19'
+method: derived
+source: graphql/jelly-api.graphql
+description: >-
+  Cross-cutting request/response semantics for the Jelly GraphQL API, derived
+  from the introspected schema (https://api.getjelly.co.uk/) and confirmed
+  against live API behaviour.
+transport:
+  style: graphql
+  endpoint: https://api.getjelly.co.uk/
+  http_method: POST
+  content_type: application/json
+authentication:
+  style: bearer
+  header: Authorization
+  ref: authentication/jelly-authentication.yml
+pagination:
+  style: cursor
+  engine: prisma
+  params:
+    cursor: cursor
+    take: take
+    skip: skip
+  filter_param: where
+  sort_param: orderBy
+  sort_values: [asc, desc]
+  string_match_mode: { param: mode, values: [default, insensitive] }
+  count_operations: >-
+    Aggregate counts are exposed as sibling *Count queries
+    (e.g. ingredientsCount, dishesCount, addressesCount) and *Connection types
+    with a totalCount field for Relay-style pagination.
+  notes: >-
+    List queries commonly accept take/skip/cursor/where/orderBy (Prisma
+    conventions). Relay-style *Connection/*Edge/*Node types also exist for
+    cursor pagination.
+idempotency:
+  supported: false
+  notes: >-
+    Jelly does not document an idempotency-key header, and none appears in the
+    GraphQL schema. Mutations follow createOne/updateOne/deleteOne naming and
+    are not idempotent by contract.
+error_envelope:
+  format: graphql
+  shape: >-
+    Standard GraphQL response: top-level "errors":[{message, extensions:{code}}]
+    with partial "data". No RFC 9457 problem+json.
+  observed_codes: [UNAUTHENTICATED, BAD_REQUEST]
+  ref: errors/jelly-error-codes.yml
+naming:
+  queries: >-
+    singular fetch (dish, ingredient), plural list (dishes, ingredients),
+    list variants (dishList), and count (dishesCount). admin* prefix guards
+    admin-scoped operations; *Node returns Relay node form.
+  mutations: >-
+    createOne<X> / updateOne<X> / deleteOne<X> / updateMany<X> /
+    deleteMany<X>, plus domain verbs (approveOneInvoice, connectOneSupplier,
+    bulkUpload, catalogueUpload).
+versioning:
+  scheme: none
+  notes: >-
+    Single unversioned GraphQL endpoint. Field-level evolution is signalled via
+    GraphQL @deprecated directives (79 Query fields and 15 Mutation fields are
+    deprecated in the current schema).
+rate_limiting:
+  documented: false
+cross_links:
+  authentication: authentication/jelly-authentication.yml
+  errors: errors/jelly-error-codes.yml
+  data_model: data-model/jelly-data-model.yml

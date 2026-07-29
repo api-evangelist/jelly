@@ -1,7 +1,15 @@
 aid: jelly
 name: Jelly
-description: Jelly is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Jelly (getjelly.co.uk) is an all-in-one costing and kitchen-management
+  platform for the hospitality industry - restaurants and professional
+  kitchens. It handles supplier invoice processing, ingredient and recipe
+  costing, gross-profit (GP) analysis, menu and dish management, suppliers,
+  products, purchase orders and stock. Jelly runs a GraphQL API at
+  api.getjelly.co.uk (bearer-authenticated, public introspection, 232 queries
+  and 168 mutations) behind its kitchen web app, and publishes a first-party
+  UI component library (Jelly UI, @getjelly/jelly-ui). Surfaced originally as a
+  Seedcamp portfolio company and enriched here from its live public surface.
 url: https://raw.githubusercontent.com/api-evangelist/jelly/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,17 +17,108 @@ x-backed-by:
 - seedcamp
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kitchen.getjelly.co.uk/icons/apple-touch-icon.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Hospitality
+- Restaurants
+- Kitchen Management
+- Food Costing
+- Recipe Costing
+- Invoice Processing
+- GraphQL
+- SaaS
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- name: Jelly GraphQL API
+  description: >-
+    Jelly's GraphQL API for costing and kitchen management. Single POST endpoint
+    at api.getjelly.co.uk with bearer-token auth and public introspection;
+    exposes kitchens, ingredients, recipes, dishes, menus, suppliers, products,
+    invoices and purchase orders.
+  humanURL: https://docs.getjelly.co.uk/
+  baseURL: https://api.getjelly.co.uk/
+  properties:
+  - type: GraphQL
+    url: graphql/jelly-api.graphql
+  - type: Introspection
+    url: graphql/jelly-api-introspection.json
+  - type: Authentication
+    url: authentication/jelly-authentication.yml
+  - type: Conventions
+    url: conventions/jelly-conventions.yml
+  - type: ErrorCatalog
+    url: errors/jelly-error-codes.yml
+  - type: DataModel
+    url: data-model/jelly-data-model.yml
+  - type: MCPServer
+    url: mcp/jelly-mcp.yml
 common:
+- type: DomainSecurity
+  url: security/jelly-domain-security.yml
 - type: Website
-  url: http://getjelly.co.uk
+  url: https://www.getjelly.co.uk/
+- type: Documentation
+  url: https://docs.getjelly.co.uk/
+- type: Pricing
+  url: https://www.getjelly.co.uk/pricing
+- type: TermsOfService
+  url: https://www.getjelly.co.uk/terms
+- type: PrivacyPolicy
+  url: https://www.getjelly.co.uk/privacy
+- type: Support
+  url: https://www.getjelly.co.uk/support
+- type: SignUp
+  url: https://kitchen.getjelly.co.uk/signup
+- type: Login
+  url: https://kitchen.getjelly.co.uk/signin
+- type: Security
+  url: https://www.getjelly.co.uk/security
+- type: GraphQL
+  url: graphql/jelly-api.graphql
+- type: Authentication
+  url: authentication/jelly-authentication.yml
+- type: Conventions
+  url: conventions/jelly-conventions.yml
+- type: ErrorCatalog
+  url: errors/jelly-error-codes.yml
+- type: DataModel
+  url: data-model/jelly-data-model.yml
+- type: Packages
+  url: packages/jelly-packages.yml
+- type: Components
+  url: components/jelly-components.yml
+- type: MCPServer
+  url: mcp/jelly-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Conformance
+  url: conformance/jelly-conformance.yml
+- type: VulnerabilityDisclosure
+  url: security/jelly-vulnerability-disclosure.yml
+- type: LLMsTxt
+  url: llms/jelly-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

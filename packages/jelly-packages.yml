@@ -1,0 +1,33 @@
+generated: '2026-07-19'
+method: searched
+source: https://registry.npmjs.org/@getjelly/jelly-ui
+description: >-
+  First-party published packages for Jelly. Jelly publishes a UI component
+  library under the @getjelly npm scope. No public API client SDK for the
+  GraphQL API was found on npm, PyPI, Maven Central, NuGet, pkg.go.dev,
+  RubyGems, Packagist or crates.io.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@getjelly/jelly-ui"
+    version: 1.3.0
+    url: https://www.npmjs.com/package/@getjelly/jelly-ui
+    install: npm install @getjelly/jelly-ui
+    official: true
+    kind: ui-components
+    description: >-
+      Jelly UI - the Jelly design-system / React component library for the
+      hospitality industry (documented at docs.getjelly.co.uk).
+registries_checked:
+  npm: "@getjelly scope - only @getjelly/jelly-ui found"
+  pypi: none
+  maven_central: none
+  nuget: none
+  pkg_go_dev: none
+  rubygems: none
+  packagist: none
+  crates_io: none
+notes: >-
+  @getjelly/jelly-ui is a UI component library, not an API client SDK - it is
+  also catalogued in components/jelly-components.yml. No official GraphQL client
+  SDK is published, so no SDKs pointer is emitted.

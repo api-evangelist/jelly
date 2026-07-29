@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: derived
+source: graphql/jelly-api.graphql
+format: graphql-errors
+description: >-
+  Error surface for the Jelly GraphQL API. GraphQL returns errors in the
+  top-level "errors" array with a machine-readable extensions.code. This
+  catalog captures the codes observed live plus schema-level error enums; it is
+  not RFC 9457 problem+json.
+envelope:
+  location: response.errors[]
+  fields:
+    message: Human-readable error message
+    extensions.code: Machine-readable error code
+error_codes:
+  - code: UNAUTHENTICATED
+    message: Unauthorized access
+    cause: Missing or invalid bearer token on an authenticated operation.
+    remediation: "Send a valid Authorization: Bearer <token> header."
+    observed: live
+  - code: BAD_REQUEST
+    message: >-
+      GraphQL operations must contain a non-empty `query` or a
+      `persistedQuery` extension.
+    cause: Malformed or empty GraphQL request body.
+    remediation: POST application/json with a non-empty query string.
+    observed: live
+schema_error_enums:
+  - name: AccReferencedItemErrorCode
+    values: [NOT_FOUND]
+    area: Accounting (Xero) publishing - a referenced item could not be resolved.
+  - name: InvoiceRejectionReason
+    area: >-
+      Reason an invoice was rejected during processing (values enumerated in
+      graphql/jelly-api.graphql).
+notes: >-
+  Jelly does not publish a public error-code reference page; this catalog is
+  derived from the introspected schema and live API probes. Domain validation
+  errors surface as GraphQL errors with context in extensions.

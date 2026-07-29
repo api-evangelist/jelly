@@ -1,0 +1,29 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.getjelly.co.uk/
+description: >-
+  Jelly UI - a first-party client-side component library for the hospitality
+  industry ("Transforming the hospitality industry one button at a time"),
+  documented at docs.getjelly.co.uk and published as @getjelly/jelly-ui on npm.
+loader:
+  registry: npm
+  package: "@getjelly/jelly-ui"
+  install: npm install @getjelly/jelly-ui
+  docs: https://docs.getjelly.co.uk/
+families:
+  - name: Core components
+    components:
+      - Button
+      - Card
+      - Input
+      - Select
+      - Switch
+      - Table
+      - Tabs
+extensibility:
+  plugins: >-
+    The docs reference a plugin mechanism for extending the component library.
+notes: >-
+  Distinct from an API SDK: this is a UI/design-system library. Documentation
+  sections observed: Getting started, Showcase, Installation, Component
+  Reference, plus a Contributing guide (Architecture guide, Design principles).

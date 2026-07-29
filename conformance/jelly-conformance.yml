@@ -1,0 +1,46 @@
+generated: '2026-07-19'
+method: derived
+source: graphql/jelly-api.graphql, https://www.getjelly.co.uk/security
+description: >-
+  Standards / posture conformance for Jelly, derived from the GraphQL schema and
+  the published security policy. Jelly ships a GraphQL API (not OpenAPI/REST),
+  so REST-oriented standards do not apply.
+standards:
+  - id: graphql
+    conforms: true
+    evidence: >-
+      Live GraphQL endpoint at https://api.getjelly.co.uk/ with full
+      introspection (Query, Mutation, 1895 types).
+  - id: graphql-introspection
+    conforms: true
+    evidence: __schema introspection is publicly enabled.
+  - id: relay-connections
+    conforms: true
+    evidence: >-
+      *Connection / *Edge / *Node types and cursor pagination present in schema.
+  - id: bearer-auth
+    conforms: true
+    evidence: >-
+      Authenticated operations require Authorization: Bearer; unauthenticated
+      calls return extensions.code UNAUTHENTICATED.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: GraphQL error envelope is used instead of application/problem+json.
+  - id: oauth2
+    conforms: false
+    evidence: No public OAuth authorization server documented.
+  - id: soc2-type2
+    conforms: false
+    status: in-progress
+    evidence: >-
+      Security policy (https://www.getjelly.co.uk/security) states "SOC 2 Type
+      II compliance efforts" are in progress; not yet certified.
+security_posture:
+  encryption_at_rest: AES-256
+  encryption_in_transit: TLS 1.2/1.3
+  controls: [role-based access control, vulnerability assessments, 24/7 monitoring, incident response, data backup, employee training]
+  source: https://www.getjelly.co.uk/security
+notes: >-
+  No published, achieved compliance certification (SOC 2 is stated as in
+  progress), so no Compliance pointer is emitted - only the documented security
+  posture above.

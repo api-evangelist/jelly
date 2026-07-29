@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+description: >-
+  Probe of /.well-known/ discovery surface across Jelly hosts. No well-known
+  documents are published; the kitchen app returns its SPA HTML shell (HTTP 200)
+  for unknown paths, which is not a valid discovery document. Recorded as
+  negative results.
+hosts:
+  - host: https://www.getjelly.co.uk
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 404 }
+  - host: https://kitchen.getjelly.co.uk
+    documents:
+      - { path: /.well-known/security.txt, status: 404 }
+      - { path: /.well-known/openid-configuration, status: 200, note: "SPA HTML shell, not a real OIDC document - ignored" }
+  - host: https://api.getjelly.co.uk
+    documents:
+      - { path: /.well-known/openid-configuration, status: 400, note: "GraphQL endpoint rejects non-GraphQL request" }
+result: none
