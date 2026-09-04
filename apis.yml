@@ -30,15 +30,16 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Unknown
+  confidence: low
   source:
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kitchen.getjelly.co.uk/icons/apple-touch-icon.png
 specificationVersion: '0.23'
@@ -91,8 +92,9 @@ apis:
     url: errors/jelly-error-codes.yml
   - type: DataModel
     url: data-model/jelly-data-model.yml
-  - type: MCPServer
+  - type: X-MCPServerCandidate
     url: mcp/jelly-mcp.yml
+    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 common:
 - type: DomainSecurity
   url: security/jelly-domain-security.yml
@@ -128,8 +130,9 @@ common:
   url: packages/jelly-packages.yml
 - type: Components
   url: components/jelly-components.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/jelly-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: Conformance
