@@ -1,0 +1,27 @@
+# Front Door AI Index — jelly — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: jelly
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.getjelly.co.uk
+  final_host: www.getjelly.co.uk
+  ownership: own
+  owner: jelly
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 2
+  host_score: 2
+  density: 2.37
+  words: 843
+  tiers:
+    agentic: 0
+    core: 1
+    model: 1
+  ambiguous: 3
+  top_terms:
+    automation: 3
+    AI: 1
+    Claude: 1
